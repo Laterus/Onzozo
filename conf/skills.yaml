@@ -1,0 +1,62 @@
+Attack:
+  desc: 'Attack Target dealing physical damage'
+  mod: STR
+  mnum: 1
+  cld: 0
+  aoe: False
+
+Taunt:
+  desc: 'Taunt Target dealing physical damage'
+  mod: STR
+  mnum: .5
+  cld: 1
+  aoe: False
+
+Bash:
+  desc: 'Attack Target dealing heavy physical damage'
+  mod: DEF
+  mnum: 2
+  cld: 3
+  aoe: False
+
+BackStab:
+  desc: 'Stab the target for physical damage'
+  mod: STR
+  mnum: 3
+  cld: 1
+  aoe: False
+
+ShadowStrike:
+  desc: 'Attack Target dealing dark damage'
+  mod: INT
+  mnum: 20
+  cld: 4
+  aoe: False
+
+Fireball:
+  desc: 'Deals Fire damage to target'
+  mod: INT
+  mnum: 2
+  cld: 1
+  aoe: False
+
+Inferno:
+  desc: 'Heavy Area Fire Damage to all targets'
+  mod: INT
+  mnum: 4
+  cld: 5
+  aoe: True
+
+Heal:
+  desc: 'Heal one Party Member'
+  mod: INT
+  mnum: 3
+  cld: 1
+  aoe: False
+
+Prayer:
+  desc: 'Heal Party'
+  mod: INT
+  mnum: 2
+  cld: 2
+  aoe: True

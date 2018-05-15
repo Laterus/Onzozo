@@ -1,0 +1,23 @@
+Warrior:
+    HP: 100
+    DEF: 8
+    STR: 8
+    INT: 2
+
+Rogue:
+    HP: 60
+    DEF: 6
+    STR: 6
+    INT: 4
+
+Mage:
+    HP: 50
+    DEF: 4
+    STR: 2
+    INT: 9
+
+Priest:
+    HP: 50
+    DEF: 5
+    STR: 4
+    INT: 7

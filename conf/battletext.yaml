@@ -1,0 +1,24 @@
+gather_party:
+    title: 'An enemy awaits! Will you join the fight?'
+    desc: 'React to this message with a :thumbsup: to join.'
+    author: 'BATTLE!'
+    footer: ''
+    inline: False
+    fields:
+        -
+          name: 'Battle will begin in $cntdwn...'
+          value: 'There is still time to join!'
+
+action_lock_in:
+    title: 'Party HP: %php'
+    desc: 'React to this message with the action you will take!'
+    author: '$mondesc // HP: $mhp'
+    footer: 'Timer: [%timer]'
+    inline: True
+    fields:
+        -
+          name: ':crossed_swords: Attack'
+          value: 'Deals 1 damage'
+        -
+          name: ':sparkle: Heal'
+          value: 'Party regains 1 HP'
