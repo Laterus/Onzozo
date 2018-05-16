@@ -4,8 +4,9 @@ import discord
 import asyncio
 import core.battle as battle
 
-TOKEN = 'MzU5NzcyNjU5NTM5NjQwMzIy.DKQexg.vfQKszIEPIkUTvtVgzj6ZgnD37o'
 CLIENT = discord.Client()
+for line in open('conf/token', 'r'):
+    TOKEN = line.rstrip('\n')
 
 async def setup():
 
