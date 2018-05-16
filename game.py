@@ -24,7 +24,7 @@ async def on_reaction_add(reaction, user):
             if reaction.emoji != '👍':
                 await CLIENT.remove_reaction(reaction.message,
                                              reaction.emoji, user)
-        if reaction.message.embeds[0]['title'].startswith('Party'):
+        if reaction.message.embeds[0]['title'].startswith('HP:'):
             for rctn in reaction.message.reactions:
                 if rctn == reaction:
                     continue

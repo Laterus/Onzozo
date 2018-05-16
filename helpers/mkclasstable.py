@@ -5,6 +5,7 @@ from tinydb import TinyDB, Query
 
 DB = TinyDB('database/data.db', default_table='players')
 Q = Query()
+DB.purge_table('classes')
 TABLE = DB.table('classes')
 
 with open('conf/classdata.yaml', 'r') as yamlf:

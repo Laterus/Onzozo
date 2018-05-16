@@ -2,17 +2,22 @@
 
 import random
 from tinydb import TinyDB, Query
-from core.common import create_bar
+from core.common import create_bar, get_classes
 
 DB = TinyDB('database/data.db', default_table='players')
 Q = Query()
+CD = get_classes()
 
-def get_player_data(NAME):
+def get_player_data(ID):
 
     TABLE = DB.table('players')
-    if not TABLE.search(Q.name == NAME):
-        TABLE.upsert({'name': NAME})
-    PDATA = TABLE.search(Q.name == NAME)
+    if not TABLE.search(Q.id == ID):
+        SKEL = {'class_levels': {}}
+        for cls in CD.keys():
+            SKEL['class_levels'][cls] = 0
+        SKEL.update({'id': ID})
+        TABLE.insert(SKEL)
+    PDATA = TABLE.search(Q.id == ID)
     return PDATA[0]
 
 class party(object):
