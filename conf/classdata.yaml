@@ -1,23 +1,27 @@
 Warrior:
-    HP: 100
-    DEF: 8
-    STR: 8
-    INT: 2
+    base_stats:
+        hp: 100
+        def: 8
+        str: 8
+        int: 2
 
 Rogue:
-    HP: 60
-    DEF: 6
-    STR: 6
-    INT: 4
+    base_stats:
+        hp: 60
+        def: 6
+        str: 6
+        int: 4
 
 Mage:
-    HP: 50
-    DEF: 4
-    STR: 2
-    INT: 9
+    base_stats:
+        hp: 50
+        def: 4
+        str: 2
+        int: 9
 
 Priest:
-    HP: 50
-    DEF: 5
-    STR: 4
-    INT: 7
+    base_stats:
+        hp: 50
+        def: 5
+        str: 4
+        int: 7

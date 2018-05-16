@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 
+import yaml
 from discord import Embed
 
 def make_embed(DATA):
@@ -24,3 +25,8 @@ def create_bar(CURPER):
             BAR = BAR + '-'
     BAR = BAR + '] ' + str(CURPER*2) + '%'
     return BAR
+
+def get_classes():
+
+    with open('conf/classdata.yaml', 'r') as yamlf:
+         return yaml.load(yamlf)
