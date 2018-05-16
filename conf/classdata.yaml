@@ -1,4 +1,5 @@
 Warrior:
+    desc: 'A Strong Warrior'
     base_stats:
         hp: 100
         def: 8
@@ -6,6 +7,7 @@ Warrior:
         int: 2
 
 Rogue:
+    desc: 'A Sneaky Rogue'
     base_stats:
         hp: 60
         def: 6
@@ -13,6 +15,7 @@ Rogue:
         int: 4
 
 Mage:
+    desc: 'A Magical Mage'
     base_stats:
         hp: 50
         def: 4
@@ -20,6 +23,7 @@ Mage:
         int: 9
 
 Priest:
+    desc: 'A Holy Healer'
     base_stats:
         hp: 50
         def: 5
