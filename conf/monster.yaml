@@ -1,0 +1,42 @@
+Goo
+  desc: 'A sticky goo, seems aggressive'
+  HP: 400
+  pow: 10
+  DEF: 1
+  
+Werewolf
+  desc: 'A deadly predator'
+  HP: 800
+  pow: 20
+  DEF: 5
+
+Wizzzzer
+  desc: 'A curious gnomish caster'
+  HP: 500
+  pow: 50
+  DEF: 0
+
+Ghost
+  desc: 'Spooooky!'
+  HP: 700
+  pow: 5
+  DEF: 30
+
+Giant Frog
+  desc: 'Rumored to be a great Prince'
+  HP: 2000
+  pow: 20
+  DEF: 20
+
+Rob
+  desc: 'Pure Man'
+  HP: 9999
+  pow: 9999
+  DEF: 9999
+
+Red Dragon
+  desc: 'A Massive Dragons, FIRE!'
+  HP: 4000
+  pow: 50
+  DEF: 40
+
