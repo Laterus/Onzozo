@@ -10,10 +10,10 @@ gather_party:
           value: 'There is still time to join!'
 
 action_lock_in:
-    title: 'Party HP: %php'
+    title: 'HP: $bar'
     desc: 'React to this message with the action you will take!'
-    author: '$mondesc // HP: $mhp'
-    footer: 'Timer: [%timer]'
+    author: '$mondesc'
+    footer: 'Timer: [$timer]'
     inline: True
     fields:
         -
@@ -22,3 +22,37 @@ action_lock_in:
         -
           name: ':sparkle: Heal'
           value: 'Party regains 1 HP'
+
+parties_turn:
+    title: 'HP: $bar'
+    desc: 'Party takes its turn...'
+    author: '$mondesc'
+    footer: 'Monster is readying an attack...'
+    inline: False
+    fields:
+        -
+          name: '$nick - $action'
+          value: '$actionresult'
+
+enemies_turn:
+    title: 'HP: $bar'
+    desc: 'Monster takes its turn...'
+    author: '$mondesc'
+    footer: ''
+    inline: False
+    fields:
+        -
+          name: 'Monster'
+          value: 'Attacks for $dmg damage!'
+
+victory:
+    title: 'Your party has successfully beat the $mondesc'
+    desc: 'Check out the loot!'
+    author: '$endstate'
+    footer: '(Look not yet implemented)'
+
+defeat:
+    title: 'Your party has succumb to the $mondesc'
+    desc: 'No loot awarded!'
+    author: '$endstate'
+    footer: '(loot not yet implemented)'

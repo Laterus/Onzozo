@@ -6,7 +6,6 @@ import yaml
 from string import Template
 from discord import Embed
 from core.common import make_embed
-from core.monster import monster
 import core.creators as creators
 
 with open('conf/battletext.yaml', 'r') as yamlf:
@@ -29,14 +28,6 @@ def gather_party(CNTDWN=None):
         EMB.set_author(name=TEXT['gather_party']['author'])
     return EMB
 
-def create_bar(AMT):
-
-    BAR = '('
-    for hp in range(AMT):
-        BAR = BAR + '='
-    BAR = BAR + ')'
-    return BAR
-
 class battle(object):
 
     def __init__(self, PARTY):
@@ -44,61 +35,58 @@ class battle(object):
         self.STATUS = True
         self.ENDSTATE = ''
         self.PARTY = PARTY
-        self.MONSTER = monster(PARTY.get_party_size())
+        self.MONSTER = creators.monster(PARTY.get_party_size())
 
     def go(self, TIMER):
 
-        EMB = Embed(title='Party HP: '+str(self.PARTY.HP),
-                    description='React to this message with the action you will take!')
-        EMB.set_author(name=self.MONSTER.DESC + ' // HP: ' + str(self.MONSTER.HP))
-        EMB.add_field(name=':crossed_swords: Attack',
-                      value='Deals 1 damage', inline=True)
-        EMB.add_field(name=':sparkle: Heal',
-                      value='Party regains 1 HP', inline=True)
-        EMB.set_footer(text='Timer: [%s]' % TIMER)
+        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
+                 'mondesc': self.MONSTER.DESC,
+                 'timer': TIMER }
+        TEMP = Template(json.dumps(TEXT['action_lock_in']))
+        DATA = json.loads(TEMP.substitute(SUBS))
+        EMB = make_embed(DATA)
         return EMB
     
     def parties_turn(self, ACTIONS):
 
         RESULT = []
-        EMB = Embed(title='Party HP: '+create_hp_bar(self.PARTY.HP),
-                    description='Party takes its turn...')
-        EMB.set_author(name=self.MONSTER.DESC + ' // HP: ' + create_hp_bar(self.MONSTER.HP))
-        EMB.set_footer(text='Monster is readying an attack...')
+        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
+                 'mondesc': self.MONSTER.DESC,
+                 'nick': '',
+                 'action': '',
+                 'actionresult': '' }
+        TEMP = Template(json.dumps(TEXT['parties_turn']))
+        DATA = json.loads(TEMP.substitute(SUBS))
+        DATA.pop('fields', None)
+        EMB = make_embed(DATA)
         RESULT.append(EMB)
         for playerid, action in ACTIONS.items():
-            EMB = Embed(title='Party HP: '+create_hp_bar(self.PARTY.HP),
-                        description='Party takes its turn...')
-            EMB.set_author(name=self.MONSTER.DESC + ' // HP: ' + create_hp_bar(self.MONSTER.HP))
-            EMB.set_footer(text='Monster is readying an attack...')
-            NICK = self.PARTY.PLIST[playerid]['nick']
-            ACT = self.do_action(action)
-            EMB.add_field(name=NICK + ' - ' + action, value=ACT, inline=False)
+            SUBS['nick'] = self.PARTY.PLIST[playerid]['nick']
+            SUBS['action'] = action
+            SUBS['actionresult'] = self.do_action(action)
+            TEMP = Template(json.dumps(TEXT['parties_turn']))
+            DATA = json.loads(TEMP.substitute(SUBS))
+            EMB = make_embed(DATA)
             RESULT.append(EMB)
         return RESULT
 
     def monsters_turn(self):
 
-        EMB = Embed(title='Party HP: '+create_hp_bar(self.PARTY.HP),
-                    description='Monster takes its turn...')
-        EMB.set_author(name=self.MONSTER.DESC + ' // HP: ' + create_hp_bar(self.MONSTER.HP))
-        EMB.add_field(name='Monster', value='Attacks for %s damage!' % str(self.MONSTER.DMG))
-        self.PARTY.HP -= self.MONSTER.DMG
-        if self.PARTY.HP <= 0:
-            self.STATUS = False
-            self.ENDSTATE = 'DEFEAT!'
+        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
+                 'mondesc': self.MONSTER.DESC,
+                 'dmg': self.MONSTER.DMG }
+        TEMP = Template(json.dumps(TEXT['enemies_turn']))
+        DATA = json.loads(TEMP.substitute(SUBS))
+        EMB = make_embed(DATA)
         return EMB
 
     def end_battle(self):
 
-        if self.ENDSTATE == 'VICTORY!':
-            EMB = Embed(title='Your party has successfully beat the %s' % self.MONSTER.DESC,
-                        description='Check out the loot!')
-        elif self.ENDSTATE == 'DEFEAT!':
-            EMB = Embed(title='Your party has succumb to the %s' % self.MONSTER.DESC,
-                        description='No loot awarded!')
-        EMB.set_author(name=self.ENDSTATE)
-        EMB.set_footer(text='(loot not yet implemented)')
+        SUBS = { 'endstate': self.ENDSTATE,
+                 'mondesc': self.MONSTER.DESC }
+        TEMP = Template(json.dumps(TEXT[self.ENDSTATE.lower().rstrip('!')]))
+        DATA = json.loads(TEMP.substitute(SUBS))
+        EMB = make_embed(DATA)
         return EMB
 
     def do_action(self, ACTION):
@@ -120,9 +108,9 @@ async def start(CLIENT):
     while True:
         MSG = await CLIENT.send_message(BTLCHAN, embed=gather_party())
         RES = await CLIENT.wait_for_reaction(emoji='👍', message=MSG)
-        for cntdwn in range(10, 0, -1):
-            await CLIENT.edit_message(MSG, embed=gather_party(CNTDWN=cntdwn))
-            time.sleep(1)
+        #for cntdwn in range(10, 0, -1):
+        #    await CLIENT.edit_message(MSG, embed=gather_party(CNTDWN=cntdwn))
+        #    time.sleep(1)
         JOINED = await CLIENT.get_reaction_users(RES[0])
         PARTY = creators.party(JOINED)
         BTL = battle(PARTY)

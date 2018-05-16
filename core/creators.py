@@ -2,6 +2,7 @@
 
 import random
 from tinydb import TinyDB, Query
+from core.common import create_bar
 
 DB = TinyDB('database/data.db', default_table='players')
 Q = Query()
@@ -41,7 +42,7 @@ def get_monster_data(MONSTERID):
 class monster(object):
 
     def __init__(self, MOD):
-
+        '''
         self.TABLE = DB.table('monsters')
         LOW = MOD - 1
         HIGH = MOD + 1
@@ -54,3 +55,15 @@ class monster(object):
         self.DESC = 'Level '+str(self.LEVEL)+' '+self.TYPE
         self.HP = int(round((5 * self.LEVEL), 0))
         self.DMG = int(round(2 + int(MOD)))
+        '''
+        self.LEVEL = (1 * int(MOD))
+        self.TYPE = 'Monster'
+        self.DESC = 'Level '+str(self.LEVEL)+' '+self.TYPE
+        self.MHP = int(round((5 * self.LEVEL), 0))
+        self.HP = self.MHP
+        self.DMG = int(round(2 + int(MOD)))
+
+    def get_hp_bar(self):
+
+        CURPER = int(round(self.HP / self.MHP, 2) * 50)
+        return create_bar(CURPER)

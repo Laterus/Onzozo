@@ -7,6 +7,18 @@ def make_embed(DATA):
     EMB = Embed(title=DATA['title'], description=DATA['desc'])
     EMB.set_author(name=DATA['author'])
     EMB.set_footer(text=DATA['footer'])
-    for f in DATA['fields']:
-        EMB.add_field(name=f['name'], value=f['value'], inline=DATA['inline'])
+    if 'fields' in DATA:
+        for f in DATA['fields']:
+            EMB.add_field(name=f['name'], value=f['value'], inline=DATA['inline'])
     return EMB
+
+def create_bar(CURPER):
+
+    BAR = '['
+    for hp in range(50):
+        if hp <= CURPER:
+            BAR = BAR + '|'
+        else:
+            BAR = BAR + '-'
+    BAR = BAR + '] ' + str(CURPER*2) + '%'
+    return BAR
