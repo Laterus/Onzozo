@@ -1,0 +1,66 @@
+top:
+    title: "Here is where you can create and manage your character."
+    desc: "Below are the options and a brief synopsis of their use."
+    color: 1
+    author: "Welcome to Headquarters!"
+    footer: ""
+    inline: False
+    fields:
+        -
+          name: "!create"
+          value: "Walks you through creating a profile"
+        -
+          name: "!change"
+          value: "Allows you to change your current class"
+        -
+          name: "!delete"
+          value: "Deletes your current profile"
+
+createstart:
+    title: "Please choose a starting Class. This can be freely changed later."
+    desc: "Select your class by responding with the name of your choice:\n\n$classchoices"
+    color: 1
+    author: "Creating a profile for $nick"
+    footer: ""
+
+createend:
+    title: "You are now setup to play. Head over to the battles channel to get started!"
+    desc: ""
+    color: 1
+    author: "Profile for $nick has been created successfully!"
+    footer: ""
+
+createtimeout:
+    title: ""
+    desc: ""
+    color: 1
+    author: "Sorry $nick, you took to long, im bored and leaving."
+    footer: ""
+
+createexists:
+    title: "If you would like to redo/restart, use the !delete option."
+    desc: ""
+    color: 1
+    author: "You already have a profile setup $nick!"
+    footer: ""
+
+deleteexists:
+    title: "Use !create to get started."
+    desc: ""
+    color: 1
+    author: "$nick, you do not have a profile to delete!"
+    footer: ""
+
+deleteconfirm:
+    title: "Respond with \"YESDELETEITOMG\" to complete this process"
+    desc: "You can also let this timeout and delete nothing..."
+    color: 1
+    author: "$nick, THIS IS PERMENANT!"
+    footer: ""
+
+deleteend:
+    title: "Use !create to get started again."
+    desc: ""
+    color: 1
+    author: "$nick, your profile has been deleted!"
+    footer: ""

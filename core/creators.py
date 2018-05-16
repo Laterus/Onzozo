@@ -11,31 +11,31 @@ CD = get_classes()
 def get_player_data(ID):
 
     TABLE = DB.table('players')
-    if not TABLE.search(Q.id == ID):
-        SKEL = {'class_levels': {}}
-        for cls in CD.keys():
-            SKEL['class_levels'][cls] = 0
-        SKEL.update({'id': ID})
-        TABLE.insert(SKEL)
     PDATA = TABLE.search(Q.id == ID)
     return PDATA[0]
+
+def get_base_stats(CLS):
+
+    TABLE = DB.table('classes')
+    STATS = TABLE.search(Q.name == CLS)
+    return STATS[0]['base_stats']
 
 class party(object):
 
     def __init__(self, PLAYERS):
 
         self.HP = 10 + (2 * len(PLAYERS))
-        self.PLIST = {}
+        self.PLIST = []
         for player in PLAYERS:
             P = {}
             P['nick'] = player.display_name
             P['avatar'] = player.avatar_url
             P.update(get_player_data(player.id))
-            self.PLIST[player.id] = P
+            P['stats'] = get_base_stats(P['current_class'])
+            self.PLIST.append(P)
 
     def get_party_size(self):
-
-        return len(self.PLIST.keys())
+        return len(self.PLIST)
 
 def get_monster_data(MONSTERID):
 
