@@ -1,10 +1,15 @@
 #!/usr/local/bin/python3
 
 import yaml
+import json
+from string import Template
 from discord import Embed
+from tinydb import TinyDB, Query
 
-def make_embed(DATA):
+def make_embed(BASE, SUBS):
 
+    TEMP = Template(json.dumps(BASE))
+    DATA = json.loads(TEMP.substitute(SUBS), strict=False)
     EMB = Embed(title=DATA['title'],
                 description=DATA['desc'],
                 color=DATA['color'])
@@ -30,3 +35,10 @@ def get_classes():
 
     with open('conf/classdata.yaml', 'r') as yamlf:
          return yaml.load(yamlf)
+
+def check_player(ID):
+
+    DB = TinyDB('database/data.db', default_table='players')
+    Q = Query()
+    TABLE = DB.table('players')
+    return TABLE.search(Q.id == ID)

@@ -31,7 +31,7 @@ Giant Frog:
     base_stats:
   	hp: 2000
   	pow: 20
-	def: 20
+        def: 20
 
 Rob:
     desc: 'Pure Man'

@@ -1,0 +1,12 @@
+introduction:
+    title: "Please read on to find out how to get started."
+    desc: |
+            In order to play, you must create a profile in the \"headquarters\" channel.
+            How to do that can be found by heading there.
+
+            Onzozo is a simple RPG party sim, that has players selecting
+            actions utilizing emoji reactions, in order to take down enemies.
+    color: 1
+    author: "Welcome to Onzozo!"
+    footer: ""
+    inline: False

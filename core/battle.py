@@ -11,18 +11,13 @@ import core.creators as creators
 with open('conf/battletext.yaml', 'r') as yamlf:
     TEXT = yaml.load(yamlf)
 
-def dictsub(DICT, SUBS):
-
-    TEMP = Template(json.dumps(DICT))
-    return json.loads(TEMP.substitute(SUBS))
-
 def gather_party(CNTDWN=None):
     
     SUBS = { 'cntdwn': CNTDWN }
-    DATA = dictsub(TEXT['gather_party'], SUBS)
+    BASE = TEXT['gather_party']
     if not CNTDWN:
-        DATA.pop('fields', None)
-    EMB = make_embed(DATA)
+        BASE.pop('fields', None)
+    EMB = make_embed(BASE, SUBS)
     return EMB
 
 class battle(object):
@@ -39,8 +34,7 @@ class battle(object):
         SUBS = { 'bar': self.MONSTER.get_hp_bar(),
                  'mondesc': self.MONSTER.DESC,
                  'timer': TIMER }
-        DATA = dictsub(TEXT['action_lock_in'], SUBS)
-        EMB = make_embed(DATA)
+        EMB = make_embed(TEXT['action_lock_in'], SUBS)
         return EMB
     
     def parties_turn(self, ACTIONS):
@@ -51,16 +45,15 @@ class battle(object):
                  'nick': '',
                  'action': '',
                  'actionresult': '' }
-        DATA = dictsub(TEXT['parties_turn'], SUBS)
-        DATA.pop('fields', None)
-        EMB = make_embed(DATA)
+        BASE = TEXT['parties_turn']
+        BASE.pop('fields', None)
+        EMB = make_embed(BASE, SUBS)
         RESULT.append(EMB)
         for playerid, action in ACTIONS.items():
             SUBS['nick'] = self.PARTY.PLIST[playerid]['nick']
             SUBS['action'] = action
             SUBS['actionresult'] = self.do_action(action)
-            DATA = dictsub(TEXT['parties_turn'], SUBS)
-            EMB = make_embed(DATA)
+            EMB = make_embed(TEXT['parties_turn'], SUBS)
             RESULT.append(EMB)
         return RESULT
 
@@ -69,16 +62,14 @@ class battle(object):
         SUBS = { 'bar': self.MONSTER.get_hp_bar(),
                  'mondesc': self.MONSTER.DESC,
                  'dmg': self.MONSTER.DMG }
-        DATA = dictsub(TEXT['enemies_turn'], SUBS)
-        EMB = make_embed(DATA)
+        EMB = make_embed(TEXT['enemies_turn'], SUBS)
         return EMB
 
     def end_battle(self):
 
         SUBS = { 'endstate': self.ENDSTATE,
                  'mondesc': self.MONSTER.DESC }
-        DATA = dictsub(TEXT[self.ENDSTATE.lower().rstrip('!')], SUBS)
-        EMB = make_embed(DATA)
+        EMB = make_embed(TEXT[self.ENDSTATE.lower().rstrip('!')], SUBS)
         return EMB
 
     def do_action(self, ACTION):
