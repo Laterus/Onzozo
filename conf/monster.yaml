@@ -1,42 +1,49 @@
-Goo
-  desc: 'A sticky goo, seems aggressive'
-  HP: 400
-  pow: 10
-  DEF: 1
+Goo:
+    desc: 'A sticky goo, seems aggressive'
+    base_stats:
+  	 hp: 400
+  	 pow: 10
+  	 def: 1
   
-Werewolf
-  desc: 'A deadly predator'
-  HP: 800
-  pow: 20
-  DEF: 5
+Werewolf:
+    desc: 'A deadly predator'
+    base_stats:
+        hp: 800
+  	pow: 20
+  	def: 5
 
-Wizzzzer
-  desc: 'A curious gnomish caster'
-  HP: 500
-  pow: 50
-  DEF: 0
+Wizzzzer:
+    desc: 'A curious gnomish caster'
+    base_stats:
+  	hp: 500
+        pow: 50
+  	def: 0
 
-Ghost
-  desc: 'Spooooky!'
-  HP: 700
-  pow: 5
-  DEF: 30
+Ghost:
+    desc: 'Spooooky!' 
+    base_stats:
+   	hp: 700
+        pow: 5
+        def: 30
 
-Giant Frog
-  desc: 'Rumored to be a great Prince'
-  HP: 2000
-  pow: 20
-  DEF: 20
+Giant Frog:
+    desc: 'Rumored to be a great Prince'
+    base_stats:
+  	hp: 2000
+  	pow: 20
+	def: 20
 
-Rob
-  desc: 'Pure Man'
-  HP: 9999
-  pow: 9999
-  DEF: 9999
+Rob:
+    desc: 'Pure Man'
+    base_stats: 
+   	hp: 9999
+  	pow: 9999
+  	def: 9999
 
-Red Dragon
-  desc: 'A Massive Dragons, FIRE!'
-  HP: 4000
-  pow: 50
-  DEF: 40
+Red Dragon:
+    desc: 'A Massive Dragons, FIRE!'
+    base_stats:     
+        hp: 4000
+        pow: 50
+        def: 40
 
