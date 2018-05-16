@@ -1,31 +1,55 @@
 Warrior:
+    icon: imgs/warrior.png
     desc: 'A Strong Warrior'
     base_stats:
         hp: 100
         def: 8
         str: 8
         int: 2
+    skills:
+        -
+          'Taunt'
+          'Bash'
+          'Attack'
 
 Rogue:
     desc: 'A Sneaky Rogue'
+    icon: imgs/rogue.png
     base_stats:
         hp: 60
         def: 6
         str: 6
         int: 4
+    skills:
+        -
+          'BackStab'
+          'ShadowStrike'
+          'Attack'
 
 Mage:
     desc: 'A Magical Mage'
+    icon: imgs/mage.png
     base_stats:
         hp: 50
         def: 4
         str: 2
         int: 9
+    skills:
+        -
+          'Fireball'
+          'Inferno'
+          'Attack'
 
 Priest:
     desc: 'A Holy Healer'
+    icon: imgs/priest.png
     base_stats:
         hp: 50
         def: 5
         str: 4
         int: 7
+    skills:
+        -
+          'Heal'
+          'Prayer'
+          'Attack'
