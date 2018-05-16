@@ -18,14 +18,11 @@ def dictsub(DICT, SUBS):
 
 def gather_party(CNTDWN=None):
     
-    if CNTDWN:
-        TEMP = Template(json.dumps(TEXT['gather_party']))
-        DATA = json.loads(TEMP.substitute({'cntdwn': CNTDWN}))
-        EMB = make_embed(DATA)
-    else:
-        EMB = Embed(title=TEXT['gather_party']['title'],
-                    description=TEXT['gather_party']['desc'])
-        EMB.set_author(name=TEXT['gather_party']['author'])
+    SUBS = { 'cntdwn': CNTDWN }
+    DATA = dictsub(TEXT['gather_party'], SUBS)
+    if not CNTDWN:
+        DATA.pop('fields', None)
+    EMB = make_embed(DATA)
     return EMB
 
 class battle(object):
@@ -42,8 +39,7 @@ class battle(object):
         SUBS = { 'bar': self.MONSTER.get_hp_bar(),
                  'mondesc': self.MONSTER.DESC,
                  'timer': TIMER }
-        TEMP = Template(json.dumps(TEXT['action_lock_in']))
-        DATA = json.loads(TEMP.substitute(SUBS))
+        DATA = dictsub(TEXT['action_lock_in'], SUBS)
         EMB = make_embed(DATA)
         return EMB
     
@@ -55,8 +51,7 @@ class battle(object):
                  'nick': '',
                  'action': '',
                  'actionresult': '' }
-        TEMP = Template(json.dumps(TEXT['parties_turn']))
-        DATA = json.loads(TEMP.substitute(SUBS))
+        DATA = dictsub(TEXT['parties_turn'], SUBS)
         DATA.pop('fields', None)
         EMB = make_embed(DATA)
         RESULT.append(EMB)
@@ -64,8 +59,7 @@ class battle(object):
             SUBS['nick'] = self.PARTY.PLIST[playerid]['nick']
             SUBS['action'] = action
             SUBS['actionresult'] = self.do_action(action)
-            TEMP = Template(json.dumps(TEXT['parties_turn']))
-            DATA = json.loads(TEMP.substitute(SUBS))
+            DATA = dictsub(TEXT['parties_turn'], SUBS)
             EMB = make_embed(DATA)
             RESULT.append(EMB)
         return RESULT
@@ -75,8 +69,7 @@ class battle(object):
         SUBS = { 'bar': self.MONSTER.get_hp_bar(),
                  'mondesc': self.MONSTER.DESC,
                  'dmg': self.MONSTER.DMG }
-        TEMP = Template(json.dumps(TEXT['enemies_turn']))
-        DATA = json.loads(TEMP.substitute(SUBS))
+        DATA = dictsub(TEXT['enemies_turn'], SUBS)
         EMB = make_embed(DATA)
         return EMB
 
@@ -84,8 +77,7 @@ class battle(object):
 
         SUBS = { 'endstate': self.ENDSTATE,
                  'mondesc': self.MONSTER.DESC }
-        TEMP = Template(json.dumps(TEXT[self.ENDSTATE.lower().rstrip('!')]))
-        DATA = json.loads(TEMP.substitute(SUBS))
+        DATA = dictsub(TEXT[self.ENDSTATE.lower().rstrip('!')], SUBS)
         EMB = make_embed(DATA)
         return EMB
 
@@ -128,9 +120,12 @@ async def start(CLIENT):
             await CLIENT.clear_reactions(MSG)
             for emb in TURN:
                 await CLIENT.edit_message(MSG, embed=emb)
+                await CLIENT.clear_reactions(MSG)
                 time.sleep(2)
             await CLIENT.edit_message(MSG, embed=BTL.monsters_turn())
+            await CLIENT.clear_reactions(MSG)
             time.sleep(2)
         await CLIENT.edit_message(MSG, embed=BTL.end_battle())
+        await CLIENT.clear_reactions(MSG)
         time.sleep(5)
         await CLIENT.delete_message(MSG)

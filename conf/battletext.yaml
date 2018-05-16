@@ -1,58 +1,61 @@
 gather_party:
-    title: 'An enemy awaits! Will you join the fight?'
-    desc: 'React to this message with a :thumbsup: to join.'
-    author: 'BATTLE!'
-    footer: ''
+    title: "An enemy awaits! Will you join the fight?"
+    desc: "React to this message with a :thumbsup: to join."
+    color: 1
+    author: "BATTLE!"
+    footer: ""
     inline: False
     fields:
         -
-          name: 'Battle will begin in $cntdwn...'
-          value: 'There is still time to join!'
+          name: "Battle will begin in $cntdwn..."
+          value: "There is still time to join!"
 
 action_lock_in:
-    title: 'HP: $bar'
-    desc: 'React to this message with the action you will take!'
-    author: '$mondesc'
-    footer: 'Timer: [$timer]'
+    title: "HP: $bar"
+    desc: "React to this message with the action you will take!\n\n*Party List*"
+    color: 65280
+    author: "$mondesc"
+    footer: "Timer: [$timer]"
     inline: True
     fields:
         -
-          name: ':crossed_swords: Attack'
-          value: 'Deals 1 damage'
-        -
-          name: ':sparkle: Heal'
-          value: 'Party regains 1 HP'
+          name: "%nick (%class) // HP: %bar"
+          value: "Available Actions: %actions\nOn Cooldown: %ocd"
 
 parties_turn:
-    title: 'HP: $bar'
-    desc: 'Party takes its turn...'
-    author: '$mondesc'
-    footer: 'Monster is readying an attack...'
+    title: "HP: $bar"
+    desc: "Party takes its turn..."
+    color: 16098851
+    author: "$mondesc"
+    footer: "Monster is readying an attack..."
     inline: False
     fields:
         -
-          name: '$nick - $action'
-          value: '$actionresult'
+          name: "$nick - $action"
+          value: "$actionresult"
 
 enemies_turn:
-    title: 'HP: $bar'
-    desc: 'Monster takes its turn...'
-    author: '$mondesc'
-    footer: ''
+    title: "HP: $bar"
+    desc: "Monster takes its turn..."
+    color: 13632027
+    author: "$mondesc"
+    footer: ""
     inline: False
     fields:
         -
-          name: 'Monster'
-          value: 'Attacks for $dmg damage!'
+          name: "Monster"
+          value: "Attacks for $dmg damage!"
 
 victory:
-    title: 'Your party has successfully beat the $mondesc'
-    desc: 'Check out the loot!'
-    author: '$endstate'
-    footer: '(Look not yet implemented)'
+    title: "Your party has successfully beat the $mondesc"
+    desc: "Check out the loot!"
+    color: 16777215
+    author: "$endstate"
+    footer: "(Look not yet implemented)"
 
 defeat:
-    title: 'Your party has succumb to the $mondesc'
-    desc: 'No loot awarded!'
-    author: '$endstate'
-    footer: '(loot not yet implemented)'
+    title: "Your party has succumb to the $mondesc"
+    desc: "No loot awarded!"
+    color: 16777215
+    author: "$endstate"
+    footer: "(loot not yet implemented)"
