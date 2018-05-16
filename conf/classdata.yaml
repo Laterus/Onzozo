@@ -1,5 +1,5 @@
 Warrior:
-    icon: imgs/warrior.png
+    icon: imgs/icons/warrior.png
     desc: 'A Strong Warrior'
     base_stats:
         hp: 100
@@ -14,7 +14,7 @@ Warrior:
 
 Rogue:
     desc: 'A Sneaky Rogue'
-    icon: imgs/rogue.png
+    icon: imgs/icons/rogue.png
     base_stats:
         hp: 60
         def: 6
@@ -28,7 +28,7 @@ Rogue:
 
 Mage:
     desc: 'A Magical Mage'
-    icon: imgs/mage.png
+    icon: imgs/icons/mage.png
     base_stats:
         hp: 50
         def: 4
@@ -42,7 +42,7 @@ Mage:
 
 Priest:
     desc: 'A Holy Healer'
-    icon: imgs/priest.png
+    icon: imgs/icons/priest.png
     base_stats:
         hp: 50
         def: 5
