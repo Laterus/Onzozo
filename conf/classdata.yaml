@@ -5,6 +5,11 @@ Warrior:
         def: 8
         str: 8
         int: 2
+    skills:
+        -
+          'Taunt'
+          'Bash'
+          'Attack'
 
 Rogue:
     desc: 'A Sneaky Rogue'
@@ -13,6 +18,11 @@ Rogue:
         def: 6
         str: 6
         int: 4
+    skills:
+        -
+          'BackStab'
+          'ShadowStrike'
+          'Attack'
 
 Mage:
     desc: 'A Magical Mage'
@@ -21,6 +31,11 @@ Mage:
         def: 4
         str: 2
         int: 9
+    skills:
+        -
+          'Fireball'
+          'Inferno'
+          'Attack'
 
 Priest:
     desc: 'A Holy Healer'
@@ -29,3 +44,8 @@ Priest:
         def: 5
         str: 4
         int: 7
+    skills:
+        -
+          'Heal'
+          'Prayer'
+          'Attack'
