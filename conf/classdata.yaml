@@ -10,7 +10,7 @@ Warrior:
         -
           'Taunt'
           'Bash'
-          'Attack'
+          'Slam'
 
 Rogue:
     desc: 'A Sneaky Rogue'
@@ -24,7 +24,7 @@ Rogue:
         -
           'BackStab'
           'ShadowStrike'
-          'Attack'
+          'Bladestorm'
 
 Mage:
     desc: 'A Magical Mage'
@@ -38,7 +38,7 @@ Mage:
         -
           'Fireball'
           'Inferno'
-          'Attack'
+          'Pyroblast'
 
 Priest:
     desc: 'A Holy Healer'
@@ -52,4 +52,4 @@ Priest:
         -
           'Heal'
           'Prayer'
-          'Attack'
+          'Judgement'

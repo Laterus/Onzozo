@@ -2,20 +2,12 @@
 
 ##class section
 
-Attack:
-  icon: imgs/icons/pending.png
-  desc: 'Attack Target dealing physical damage'
-  mod: STR
-  mnum: 1
-  cld: 0
-  aoe: False
-
 Taunt:
   icon: imgs/icons/pending.png
   desc: 'Taunt Target dealing physical damage'
   mod: STR
   mnum: .5
-  cld: 1
+  cld: 20
   aoe: False
 
 Bash:
@@ -23,7 +15,7 @@ Bash:
   desc: 'Attack Target dealing heavy physical damage'
   mod: DEF
   mnum: 2
-  cld: 3
+  cld: 40
   aoe: False
 
 BackStab:
@@ -31,14 +23,14 @@ BackStab:
   desc: 'Stab the target for physical damage'
   mod: STR
   mnum: 3
-  cld: 1
+  cld: 15
   aoe: False
 
 ShadowStrike:
   icon: imgs/icons/pending.png
   desc: 'Attack Target dealing dark damage'
   mod: INT
-  mnum: 20
+  mnum: 50
   cld: 4
   aoe: False
 
@@ -47,7 +39,7 @@ Fireball:
   desc: 'Deals Fire damage to target'
   mod: INT
   mnum: 2
-  cld: 1
+  cld: 15
   aoe: False
 
 Inferno:
@@ -55,7 +47,7 @@ Inferno:
   desc: 'Heavy Area Fire Damage to all targets'
   mod: INT
   mnum: 4
-  cld: 5
+  cld: 60
   aoe: True
 
 Heal:
@@ -63,7 +55,7 @@ Heal:
   desc: 'Heal one Party Member'
   mod: INT
   mnum: 3
-  cld: 1
+  cld: 15
   aoe: False
 
 Prayer:
@@ -71,10 +63,36 @@ Prayer:
   desc: 'Heal Party'
   mod: INT
   mnum: 2
-  cld: 2
+  cld: 40
   aoe: True
 
+Slam:
+  desc: 'Slam a target for phsycial damage'
+  mod: str
+  nmun: 1
+  cld: 15
+  aoe: False
 
+Bladestorm:
+  desc: 'Rampage all targets for physical damage'
+  mod: str
+  nmun: 3
+  cld: 45
+  aoe: True
+
+Pyroblast:
+  desc: 'A heavy fire spell that hits one target'
+  mod: int
+  nmun: 10
+  cld: 90
+  aoe: False
+
+Judgement:
+  desc: 'Judge the target for holy damage'
+  mod: int
+  nmun: 2
+  cld: 20
+  aoe: False
 
 
 ## Monster Section
@@ -83,7 +101,7 @@ Slap:
   desc: 'A minor slap to the target for physical dmg'
   mod: pow
   nmun: 1
-  cld: 0
+  cld: 15
   aoe: False
 
 Goo Ball:
@@ -91,7 +109,7 @@ Goo Ball:
   desc: 'Toss a elemental ball for earth damage at the target'
   mod: pow
   nmun: 2
-  cld: 3
+  cld: 40
   aoe: False
 
 Slime Time:
@@ -99,7 +117,7 @@ Slime Time:
   desc: 'Expel all stored goo for high aoe earth damage'
   mod: pow
   nmun: 2
-  cld: 8
+  cld: 70
   aoe: True
 
 Claw:
@@ -107,7 +125,7 @@ Claw:
   desc: 'Claw the target for physical damage'
   mod: pow
   nmun: 1
-  cld: 0
+  cld: 15
   aoe: False
 
 Swipe:
@@ -115,7 +133,7 @@ Swipe:
   desc: 'Swipe all targets for physical damage'
   mod: pow
   nmun: 1
-  cld: 1
+  cld: 30
   aoe: True
 
 Fatal Blow:
@@ -123,7 +141,7 @@ Fatal Blow:
   desc: 'A heavy physical strike on a target'
   mod: pow
   nmun: 3
-  cld: 3
+  cld: 50
   aoe: False
 
 Zap:
@@ -131,7 +149,7 @@ Zap:
   desc: 'Attacks a target for electric damage'
   mod: pow
   nmun: 1
-  cld: 3
+  cld: 30
   aoe: False
 
 Storm:
@@ -139,7 +157,7 @@ Storm:
   desc: 'An area of electric damange to all targets'
   mod: pow
   nmun: 1
-  cld: 5
+  cld: 80
   aoe: True
 
 Fumble:
@@ -147,7 +165,7 @@ Fumble:
   desc: 'The Monster fumbles, falling over and wastes their turn'
   mod: pow
   nmun: 0
-  cld: 0
+  cld: 30
   aoe: False
 
 Spook:
@@ -155,7 +173,7 @@ Spook:
   desc: 'Cause a shadow of terror doing area shadow damage'
   mod: pow
   nmun: 3
-  cld: 3
+  cld: 45
   aoe: True
 
 Lick:
@@ -163,7 +181,7 @@ Lick:
   desc: 'Lick the target for high physical dmg'
   mod: pow
   nmun: 2
-  cld: 1
+  cld: 20
   aoe: False
 
 Gun:
@@ -171,7 +189,7 @@ Gun:
   desc: 'Shoot the target, this will end in death'
   mod: pow
   nmun: 100
-  cld: 5
+  cld: 80
   aoe: False
 
 Fire Breathe:
@@ -179,5 +197,5 @@ Fire Breathe:
   desc: 'Burn all targets for fire dmg'
   mod: pow
   nmun: 3
-  cld: 2
+  cld: 60
   aoe: True
