@@ -1,3 +1,7 @@
+#Please place skill in correct section
+
+##class section
+
 Attack:
   desc: 'Attack Target dealing physical damage'
   mod: STR
@@ -60,3 +64,9 @@ Prayer:
   mnum: 2
   cld: 2
   aoe: True
+
+
+
+
+## Monster Section
+
