@@ -69,4 +69,93 @@ Prayer:
 
 
 ## Monster Section
+Slap:
+  desc: 'A minor slap to the target for physical dmg'
+  mod: pow
+  nmun: 1
+  cld: 0
+  aoe: False
 
+Goo Ball:
+  desc: 'Toss a elemental ball for earth damage at the target'
+  mod: pow
+  nmun: 2
+  cld: 3
+  aoe: False
+
+Slime Time:
+  desc: 'Expel all stored goo for high aoe earth damage'
+  mod: pow
+  nmun: 2
+  cld: 8
+  aoe: True
+
+Claw:
+  desc: 'Claw the target for physical damage'
+  mod: pow
+  nmun: 1
+  cld: 0
+  aoe: False
+
+Swipe:
+  desc: 'Swipe all targets for physical damage'
+  mod: pow
+  nmun: 1
+  cld: 1
+  aoe: True
+
+Fatal Blow:
+  desc: 'A heavy physical strike on a target'
+  mod: pow
+  nmun: 3
+  cld: 3
+  aoe: False
+
+Zap:
+  desc: 'Attacks a target for electric damage'
+  mod: pow
+  nmun: 1
+  cld: 3
+  aoe: False
+
+Storm:
+  desc: 'An area of electric damange to all targets'
+  mod: pow
+  nmun: 1
+  cld: 5
+  aoe: True
+
+Fumble:
+  desc: 'The Monster fumbles, falling over and wastes their turn'
+  mod: pow
+  nmun: 0
+  cld: 0
+  aoe: False
+
+Spook:
+  desc: 'Cause a shadow of terror doing area shadow damage'
+  mod: pow
+  nmun: 3
+  cld: 3
+  aoe: True
+
+Lick:
+  desc: 'Lick the target for high physical dmg'
+  mod: pow
+  nmun: 2
+  cld: 1
+  aoe: False
+
+Gun:
+  desc: 'Shoot the target, this will end in death'
+  mod: pow
+  nmun: 100
+  cld: 5
+  aoe: False
+
+Fire Breathe:
+  desc: 'Burn all targets for fire dmg'
+  mod: pow
+  nmun: 3
+  cld: 2
+  aoe: True

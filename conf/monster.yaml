@@ -6,6 +6,11 @@ Goo:
   	 hp: 400
   	 pow: 10
   	 def: 1
+    skills:
+        -
+          'Slap'
+          'Goo Ball'
+          'Slime Time'
   
 Werewolf:
     desc: 'A deadly predator'
@@ -15,6 +20,11 @@ Werewolf:
         hp: 800
   	pow: 20
   	def: 5
+    skills:
+        -
+          'Claw'
+          'Swipe'
+          'Fatal Blow'
 
 Wizzzzer:
     desc: 'A curious gnomish caster'
@@ -24,6 +34,11 @@ Wizzzzer:
   	hp: 500
         pow: 50
   	def: 0
+    skills:
+        -
+          'Zap'
+          'Storm'
+          'Fumble'
 
 Ghost:
     desc: 'Spooooky!'
@@ -33,6 +48,11 @@ Ghost:
    	hp: 700
         pow: 5
         def: 30
+    skills:
+        -
+          'Slap'
+          'Goo Ball'
+          'Spook'
 
 Giant Frog:
     desc: 'Rumored to be a great Prince'
@@ -42,6 +62,11 @@ Giant Frog:
   	hp: 2000
   	pow: 20
         def: 20
+    skills:
+        -
+          'Lick'
+          'Swipe'
+          'Slime Time'
 
 Rob:
     desc: 'Pure Man'
@@ -51,6 +76,10 @@ Rob:
    	hp: 9999
   	pow: 9999
   	def: 9999
+    skills:
+        -
+          'Fumble'
+          'Gun'
 
 Red Dragon:
     desc: 'A Massive Dragons, FIRE!'
@@ -60,4 +89,8 @@ Red Dragon:
         hp: 4000
         pow: 50
         def: 40
-
+    skills:
+        -
+          'Swipe'
+          'Claw'
+          'Fire Breathe'
