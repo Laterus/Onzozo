@@ -67,6 +67,7 @@ Prayer:
   aoe: True
 
 Slam:
+  icon: imgs/icons/pending.png
   desc: 'Slam a target for phsycial damage'
   mod: str
   nmun: 1
@@ -74,6 +75,7 @@ Slam:
   aoe: False
 
 Bladestorm:
+  icon: imgs/icons/pending.png
   desc: 'Rampage all targets for physical damage'
   mod: str
   nmun: 3
@@ -81,6 +83,7 @@ Bladestorm:
   aoe: True
 
 Pyroblast:
+  icon: imgs/icons/pending.png
   desc: 'A heavy fire spell that hits one target'
   mod: int
   nmun: 10
@@ -88,6 +91,7 @@ Pyroblast:
   aoe: False
 
 Judgement:
+  icon: imgs/icons/pending.png
   desc: 'Judge the target for holy damage'
   mod: int
   nmun: 2
