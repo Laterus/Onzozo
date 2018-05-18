@@ -1,62 +1,205 @@
-Attack:
-  desc: 'Attack Target dealing physical damage'
-  mod: STR
-  mnum: 1
-  cld: 0
-  aoe: False
+#Please place skill in correct section
+
+##class section
 
 Taunt:
+  icon: imgs/icons/pending.png
   desc: 'Taunt Target dealing physical damage'
   mod: STR
   mnum: .5
-  cld: 1
+  cld: 20
   aoe: False
 
 Bash:
+  icon: imgs/icons/pending.png
   desc: 'Attack Target dealing heavy physical damage'
   mod: DEF
   mnum: 2
-  cld: 3
+  cld: 40
   aoe: False
 
 BackStab:
+  icon: imgs/icons/pending.png
   desc: 'Stab the target for physical damage'
   mod: STR
   mnum: 3
-  cld: 1
+  cld: 15
   aoe: False
 
 ShadowStrike:
+  icon: imgs/icons/pending.png
   desc: 'Attack Target dealing dark damage'
   mod: INT
-  mnum: 20
+  mnum: 50
   cld: 4
   aoe: False
 
 Fireball:
+  icon: imgs/icons/pending.png
   desc: 'Deals Fire damage to target'
   mod: INT
   mnum: 2
-  cld: 1
+  cld: 15
   aoe: False
 
 Inferno:
+  icon: imgs/icons/pending.png
   desc: 'Heavy Area Fire Damage to all targets'
   mod: INT
   mnum: 4
-  cld: 5
+  cld: 60
   aoe: True
 
 Heal:
+  icon: imgs/icons/pending.png
   desc: 'Heal one Party Member'
   mod: INT
   mnum: 3
-  cld: 1
+  cld: 15
   aoe: False
 
 Prayer:
+  icon: imgs/icons/pending.png
   desc: 'Heal Party'
   mod: INT
   mnum: 2
-  cld: 2
+  cld: 40
+  aoe: True
+
+Slam:
+  icon: imgs/icons/pending.png
+  desc: 'Slam a target for phsycial damage'
+  mod: str
+  nmun: 1
+  cld: 15
+  aoe: False
+
+Bladestorm:
+  icon: imgs/icons/pending.png
+  desc: 'Rampage all targets for physical damage'
+  mod: str
+  nmun: 3
+  cld: 45
+  aoe: True
+
+Pyroblast:
+  icon: imgs/icons/pending.png
+  desc: 'A heavy fire spell that hits one target'
+  mod: int
+  nmun: 10
+  cld: 90
+  aoe: False
+
+Judgement:
+  icon: imgs/icons/pending.png
+  desc: 'Judge the target for holy damage'
+  mod: int
+  nmun: 2
+  cld: 20
+  aoe: False
+
+
+## Monster Section
+Slap:
+  icon: imgs/icons/pending.png
+  desc: 'A minor slap to the target for physical dmg'
+  mod: pow
+  nmun: 1
+  cld: 15
+  aoe: False
+
+Goo Ball:
+  icon: imgs/icons/pending.png
+  desc: 'Toss a elemental ball for earth damage at the target'
+  mod: pow
+  nmun: 2
+  cld: 40
+  aoe: False
+
+Slime Time:
+  icon: imgs/icons/pending.png
+  desc: 'Expel all stored goo for high aoe earth damage'
+  mod: pow
+  nmun: 2
+  cld: 70
+  aoe: True
+
+Claw:
+  icon: imgs/icons/pending.png
+  desc: 'Claw the target for physical damage'
+  mod: pow
+  nmun: 1
+  cld: 15
+  aoe: False
+
+Swipe:
+  icon: imgs/icons/pending.png
+  desc: 'Swipe all targets for physical damage'
+  mod: pow
+  nmun: 1
+  cld: 30
+  aoe: True
+
+Fatal Blow:
+  icon: imgs/icons/pending.png
+  desc: 'A heavy physical strike on a target'
+  mod: pow
+  nmun: 3
+  cld: 50
+  aoe: False
+
+Zap:
+  icon: imgs/icons/pending.png
+  desc: 'Attacks a target for electric damage'
+  mod: pow
+  nmun: 1
+  cld: 30
+  aoe: False
+
+Storm:
+  icon: imgs/icons/pending.png
+  desc: 'An area of electric damange to all targets'
+  mod: pow
+  nmun: 1
+  cld: 80
+  aoe: True
+
+Fumble:
+  icon: imgs/icons/pending.png
+  desc: 'The Monster fumbles, falling over and wastes their turn'
+  mod: pow
+  nmun: 0
+  cld: 30
+  aoe: False
+
+Spook:
+  icon: imgs/icons/pending.png
+  desc: 'Cause a shadow of terror doing area shadow damage'
+  mod: pow
+  nmun: 3
+  cld: 45
+  aoe: True
+
+Lick:
+  icon: imgs/icons/pending.png
+  desc: 'Lick the target for high physical dmg'
+  mod: pow
+  nmun: 2
+  cld: 20
+  aoe: False
+
+Gun:
+  icon: imgs/icons/pending.png
+  desc: 'Shoot the target, this will end in death'
+  mod: pow
+  nmun: 100
+  cld: 80
+  aoe: False
+
+Fire Breathe:
+  icon: imgs/icons/pending.png
+  desc: 'Burn all targets for fire dmg'
+  mod: pow
+  nmun: 3
+  cld: 60
   aoe: True

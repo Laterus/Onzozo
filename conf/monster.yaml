@@ -1,48 +1,96 @@
 Goo:
     desc: 'A sticky goo, seems aggressive'
+    icon: imgs/icons/monster.png
+    type: elemental
     base_stats:
         hp: 400
         pow: 10
         def: 1
+    skills:
+        -
+          'Slap'
+          'Goo Ball'
+          'Slime Time'
   
 Werewolf:
     desc: 'A deadly predator'
+    type: human
+    icon: imgs/icons/monster.png
     base_stats:
         hp: 800
         pow: 20
         def: 5
+    skills:
+        -
+          'Claw'
+          'Swipe'
+          'Fatal Blow'
 
 Wizzzzer:
     desc: 'A curious gnomish caster'
+    type: human
+    icon: imgs/icons/monster.png
     base_stats:
         hp: 500
         pow: 50
         def: 0
+    skills:
+        -
+          'Zap'
+          'Storm'
+          'Fumble'
 
 Ghost:
-    desc: 'Spooooky!' 
+    desc: 'Spooooky!'
+    type: spectral
+    icon: imgs/icons/monster.png
     base_stats:
         hp: 700
         pow: 5
         def: 30
+    skills:
+        -
+          'Slap'
+          'Goo Ball'
+          'Spook'
 
 Giant Frog:
     desc: 'Rumored to be a great Prince'
+    type: beast
+    icon: imgs/icons/monster.png
     base_stats:
         hp: 2000
         pow: 20
         def: 20
+    skills:
+        -
+          'Lick'
+          'Swipe'
+          'Slime Time'
 
 Rob:
     desc: 'Pure Man'
+    type: boss
+    icon: imgs/icons/monster.png
     base_stats: 
         hp: 9999
         pow: 9999
         def: 9999
+    skills:
+        -
+          'Fumble'
+          'Gun'
 
 Red Dragon:
     desc: 'A Massive Dragons, FIRE!'
+    type: dragon
+    icon: imgs/icons/monster.png
     base_stats:     
         hp: 4000
         pow: 50
         def: 40
+    skills:
+        -
+          'Swipe'
+          'Claw'
+          'Fire Breathe'
