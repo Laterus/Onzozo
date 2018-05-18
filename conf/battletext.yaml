@@ -2,20 +2,55 @@ gather_party:
     title: "An enemy awaits! Will you join the fight?"
     desc: "React to this message with a :thumbsup: to join."
     color: 1
-    author: "BATTLE!"
+    author:
+        name: "BATTLE!"
+    footer: ""
+
+gather_party_cntdwn:
+    title: "An enemy awaits! Will you join the fight?"
+    desc: "React to this message with a :thumbsup: to join."
+    color: 1
+    author:
+        name: "BATTLE!"
     footer: ""
     inline: False
     fields:
         -
-          name: "Battle will begin in $cntdwn..."
+          name: "Battle will begin in @cntdwn!..."
           value: "There is still time to join!"
 
+enemy_party:
+    title: ""
+    desc: ""
+    author:
+        name: "Enemy Party"
+    color: 16711710
+    footer: ""
+    inline: True
+    fields:
+        -
+          name: "(@slot!) @name"
+          value: "@hpbar!\n\nTarget -> @target"
+
+player_party:
+    title: ""
+    desc: "----------"
+    author:
+        name: "Player Party"
+    color: 1441536
+    footer: ""
+    inline: True
+    fields:
+        -
+          name: "(@slot!) @name"
+          value: "@hpbar"
+
 action_lock_in:
-    title: "HP: $bar"
+    title: "HP: @bar"
     desc: "React to this message with the action you will take!\n\n*Party List*"
     color: 65280
-    author: "$mondesc"
-    footer: "Timer: [$timer]"
+    author: "@mondesc"
+    footer: "Timer: [@timer]"
     inline: True
     fields:
         -
@@ -23,39 +58,39 @@ action_lock_in:
           value: "Available Actions: %actions\nOn Cooldown: %ocd"
 
 parties_turn:
-    title: "HP: $bar"
+    title: "HP: @bar"
     desc: "Party takes its turn..."
     color: 16098851
-    author: "$mondesc"
+    author: "@mondesc"
     footer: "Monster is readying an attack..."
     inline: False
     fields:
         -
-          name: "$nick - $action"
-          value: "$actionresult"
+          name: "@nick - @action"
+          value: "@actionresult"
 
 enemies_turn:
-    title: "HP: $bar"
+    title: "HP: @bar"
     desc: "Monster takes its turn..."
     color: 13632027
-    author: "$mondesc"
+    author: "@mondesc"
     footer: ""
     inline: False
     fields:
         -
           name: "Monster"
-          value: "Attacks for $dmg damage!"
+          value: "Attacks for @dmg damage!"
 
 victory:
-    title: "Your party has successfully beat the $mondesc"
+    title: "Your party has successfully beat the @mondesc"
     desc: "Check out the loot!"
     color: 16777215
-    author: "$endstate"
+    author: "@endstate"
     footer: "(Look not yet implemented)"
 
 defeat:
-    title: "Your party has succumb to the $mondesc"
+    title: "Your party has succumb to the @mondesc"
     desc: "No loot awarded!"
     color: 16777215
-    author: "$endstate"
+    author: "@endstate"
     footer: "(loot not yet implemented)"

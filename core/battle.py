@@ -1,122 +1,129 @@
-#!/usr/bin/python
+#!/usr/local/bin/python3
 
 import time
 import json
 import yaml
-from string import Template
 from discord import Embed
-from core.common import make_embed
+from core.common import make_embed, dictsub
 import core.creators as creators
 
 with open('conf/battletext.yaml', 'r') as yamlf:
     TEXT = yaml.load(yamlf)
 
-def gather_party(CNTDWN=None):
-    
-    SUBS = { 'cntdwn': CNTDWN }
-    BASE = TEXT['gather_party']
-    if not CNTDWN:
-        BASE.pop('fields', None)
-    EMB = make_embed(BASE, SUBS)
-    return EMB
+def get_hpbar(MEM):
+
+    BARSIZE = 20
+    PERDEC = round(MEM['stats']['hp'] / MEM['stats']['maxhp'], 2)
+    CURPER = int(PERDEC * 100)
+    NOTCHES = int(PERDEC * BARSIZE)
+    BAR = '['
+    for hp in range(BARSIZE):
+        if hp <= NOTCHES:
+            BAR = BAR + '|'
+        else:
+            BAR = BAR + '-'
+    BAR = BAR + '] ' + str(CURPER) + '%'
+    return BAR
+
+def gen_cooldown(SECS):
+
+    for sec in range(SECS, 1, -1):
+        yield sec
 
 class battle(object):
 
-    def __init__(self, PARTY):
+    def __init__(self, PARTY, MONSTERS):
 
         self.STATUS = True
         self.ENDSTATE = ''
         self.PARTY = PARTY
-        self.MONSTER = creators.monster(PARTY.get_party_size())
+        self.MONSTERS = MONSTERS
 
-    def go(self, TIMER):
+    def monster_party(self):
 
-        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
-                 'mondesc': self.MONSTER.DESC,
-                 'timer': TIMER }
-        EMB = make_embed(TEXT['action_lock_in'], SUBS)
-        return EMB
-    
-    def parties_turn(self, ACTIONS):
+        SUBS = {}
+        TEMP = TEXT['enemy_party']
+        FIELDS = TEMP.pop('fields')
+        TEMP['fields'] = []
+        for monster in self.MONSTERS.keys():
+            MON = self.MONSTERS[monster]
+            MON['hpbar'] = get_hpbar(MON)
+            TEMP['fields'].append(dictsub(FIELDS[0], MON))
+        EMBD = dictsub(TEMP, SUBS)
+        return make_embed(EMBD)
 
-        RESULT = []
-        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
-                 'mondesc': self.MONSTER.DESC,
-                 'nick': '',
-                 'action': '',
-                 'actionresult': '' }
-        BASE = TEXT['parties_turn']
-        BASE.pop('fields', None)
-        EMB = make_embed(BASE, SUBS)
-        RESULT.append(EMB)
-        for playerid, action in ACTIONS.items():
-            SUBS['nick'] = self.PARTY.PLIST[playerid]['nick']
-            SUBS['action'] = action
-            SUBS['actionresult'] = self.do_action(action)
-            EMB = make_embed(TEXT['parties_turn'], SUBS)
-            RESULT.append(EMB)
-        return RESULT
+    def player_party(self):
 
-    def monsters_turn(self):
+        SUBS = {}
+        TEMP = TEXT['player_party']
+        FIELDS = TEMP.pop('fields')
+        TEMP['fields'] = []
+        for player in self.PARTY.keys():
+            MEM = self.PARTY[player]
+            MEM['hpbar'] = get_hpbar(MEM)
+            TEMP['fields'].append(dictsub(FIELDS[0], MEM))
+        EMBD = dictsub(TEMP, SUBS)
+        return make_embed(EMBD)
 
-        SUBS = { 'bar': self.MONSTER.get_hp_bar(),
-                 'mondesc': self.MONSTER.DESC,
-                 'dmg': self.MONSTER.DMG }
-        EMB = make_embed(TEXT['enemies_turn'], SUBS)
-        return EMB
+    def parse(self, MSG):
 
-    def end_battle(self):
+        ACTION = MSG.content[2:].lower().split(' ')
+        PLAYER = self.PARTY[MSG.author.id]
+        LOWSKL = [ skill.lower() for skill in PLAYER['skills'].keys() ]
+        if ACTION[0] in LOWSKL:
+            if len(ACTION) < 2:
+                TARGET = 1
+            else:
+                TARGET = ACTION[1]
+            self.do_action(ACTION[0], PLAYER, TARGET)
 
-        SUBS = { 'endstate': self.ENDSTATE,
-                 'mondesc': self.MONSTER.DESC }
-        EMB = make_embed(TEXT[self.ENDSTATE.lower().rstrip('!')], SUBS)
-        return EMB
+    def do_action(self, ACTION, PLAYER, TARGET):
+        print (ACTION, PLAYER, TARGET)
 
-    def do_action(self, ACTION):
+async def gather_party(CLIENT, BTLCHAN):
 
-        if ACTION == '⚔':
-            self.MONSTER.HP -= 1
-            if self.MONSTER.HP <= 0:
-                self.STATUS = False
-                self.ENDSTATE = 'VICTORY!'
-            return 'Attacks dealing 1 damage.'
-        elif ACTION == '❇':
-            self.PARTY.HP += 1
-            return 'Heals the party for 1 HP'
+    BASE = TEXT['gather_party']
+    BASECNT = TEXT['gather_party_cntdwn']
+    MSG = await CLIENT.send_message(BTLCHAN, embed=make_embed(BASE))
+    RES = await CLIENT.wait_for_reaction(emoji='👍', message=MSG)
+    #for cntdwn in range(10, 0, -1):
+    #    SUBS = { 'cntdwn': cntdwn }
+    #    EMBD = dictsub(BASECNT, SUBS)
+    #    await CLIENT.edit_message(MSG, embed=make_embed(EMBD))
+    #    time.sleep(1)
+    PARTY = await CLIENT.get_reaction_users(RES[0])
+    await CLIENT.delete_message(MSG)
+    return PARTY
 
 async def start(CLIENT):
 
     BTLCHAN = CLIENT.get_channel('436221281457799178')
     await CLIENT.purge_from(BTLCHAN)
+
+    @CLIENT.event
+    async def on_message(message):
+        if message.channel != BTLCHAN:
+            pass
+        if message.content.startswith('//'):
+            try:
+                BTL.parse(message)
+            except NameError:
+                pass
+            await CLIENT.delete_message(message)
+        else:
+            if not message.author.bot:
+                await CLIENT.delete_message(message)
+
     while True:
-        MSG = await CLIENT.send_message(BTLCHAN, embed=gather_party())
-        RES = await CLIENT.wait_for_reaction(emoji='👍', message=MSG)
-        #for cntdwn in range(10, 0, -1):
-        #    await CLIENT.edit_message(MSG, embed=gather_party(CNTDWN=cntdwn))
-        #    time.sleep(1)
-        JOINED = await CLIENT.get_reaction_users(RES[0])
-        PARTY = creators.party(JOINED)
-        BTL = battle(PARTY)
-        await CLIENT.clear_reactions(MSG)
+        JOINED = await gather_party(CLIENT, BTLCHAN)
+        PARTY = creators.setup_player_party(JOINED)
+        MONSTERS = creators.generate_monster(1)
+        BTL = battle(PARTY, MONSTERS)
+        COUNT = 0
+        MPMSG = await CLIENT.send_message(BTLCHAN, embed=BTL.monster_party())
+        PPMSG = await CLIENT.send_message(BTLCHAN, embed=BTL.player_party())
         while BTL.STATUS == True:
-            for cntdwn in range(10, 0, -1):
-                MSG = await CLIENT.edit_message(MSG, embed=BTL.go(cntdwn))
-                time.sleep(1)
-            ACTIONS = {}
-            for rctn in MSG.reactions:
-                USERS = await CLIENT.get_reaction_users(rctn)
-                for user in USERS:
-                    ACTIONS[user.id] = rctn.emoji
-            TURN = BTL.parties_turn(ACTIONS)
-            await CLIENT.clear_reactions(MSG)
-            for emb in TURN:
-                await CLIENT.edit_message(MSG, embed=emb)
-                await CLIENT.clear_reactions(MSG)
-                time.sleep(2)
-            await CLIENT.edit_message(MSG, embed=BTL.monsters_turn())
-            await CLIENT.clear_reactions(MSG)
-            time.sleep(2)
-        await CLIENT.edit_message(MSG, embed=BTL.end_battle())
-        await CLIENT.clear_reactions(MSG)
-        time.sleep(5)
-        await CLIENT.delete_message(MSG)
+            await CLIENT.edit_message(MPMSG, embed=BTL.monster_party())
+            await CLIENT.edit_message(PPMSG, embed=BTL.player_party())
+            time.sleep(1)
+            COUNT += 1

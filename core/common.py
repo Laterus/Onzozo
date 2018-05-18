@@ -2,39 +2,26 @@
 
 import yaml
 import json
-from string import Template
+from trender import TRender
 from discord import Embed
 from tinydb import TinyDB, Query
 
-def make_embed(BASE, SUBS):
+def dictsub(DICT, SUBS):
 
-    TEMP = Template(json.dumps(BASE))
-    DATA = json.loads(TEMP.substitute(SUBS), strict=False)
+    TEMP = TRender(json.dumps(DICT))
+    return json.loads(TEMP.render(SUBS), strict=False)
+
+def make_embed(DATA):
+
     EMB = Embed(title=DATA['title'],
                 description=DATA['desc'],
                 color=DATA['color'])
-    EMB.set_author(name=DATA['author'])
+    EMB.set_author(name=DATA['author']['name'])
     EMB.set_footer(text=DATA['footer'])
     if 'fields' in DATA:
         for f in DATA['fields']:
             EMB.add_field(name=f['name'], value=f['value'], inline=DATA['inline'])
     return EMB
-
-def create_bar(CURPER):
-
-    BAR = '['
-    for hp in range(50):
-        if hp <= CURPER:
-            BAR = BAR + '|'
-        else:
-            BAR = BAR + '-'
-    BAR = BAR + '] ' + str(CURPER*2) + '%'
-    return BAR
-
-def get_classes():
-
-    with open('conf/classdata.yaml', 'r') as yamlf:
-         return yaml.load(yamlf)
 
 def check_player(ID):
 

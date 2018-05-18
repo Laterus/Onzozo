@@ -3,24 +3,33 @@
 import time
 import yaml
 from tinydb import TinyDB, Query
-from core.common import (make_embed, get_classes,
-                         check_player)
+from core.common import make_embed, check_player
 
 DB = TinyDB('database/data.db', default_table='players')
 Q = Query()
-CD = get_classes()
 
 with open('conf/headquarterstext.yaml', 'r') as yamlf:
     TEXT = yaml.load(yamlf)
 
-def create_profile(ID, CLS):
+with open('conf/classdata.yaml', 'r') as yamlf:
+    CD = yaml.load(yamlf)
+
+def check_player(ID):
 
     TABLE = DB.table('players')
-    SKEL = { 'id': ID,
+    return TABLE.search(Q.id == ID)
+
+def create_profile(PLAYER, CLS):
+
+    TABLE = DB.table('players')
+    SKEL = { 'id': PLAYER.id,
+             'name': PLAYER.display_name,
+             'avatar': PLAYER.avatar_url,
              'current_class': CLS,
+             'current_class_level': 1,
              'class_levels': {} }
     for cls in CD.keys():
-        SKEL['class_levels'][cls] = 0
+        SKEL['class_levels'][cls] = 1
     TABLE.insert(SKEL)
 
 def delete_profile(ID):
@@ -45,7 +54,7 @@ async def create(CLIENT, MSG):
         EMB = make_embed(TEXT['createtimeout'], SUBS)
         await CLIENT.edit_message(CRMSG, embed=EMB)
     else:
-        create_profile(MSG.author.id, CCMSG.content)
+        create_profile(MSG.author, CCMSG.content)
         EMB = make_embed(TEXT['createend'], SUBS)
         await CLIENT.edit_message(CRMSG, embed=EMB)
     async for msg in CLIENT.logs_from(MSG.channel):
@@ -81,7 +90,7 @@ async def parse(CLIENT, MSG):
             await CLIENT.delete_messages([EMSG, MSG])
         else:
             await create(CLIENT, MSG)
-    elif MSG.content.startswith('!change'):
+    elif MSG.content.startswith('!update'):
         pass
     elif MSG.content.startswith('!delete'):
         if not check_player(MSG.author.id):
