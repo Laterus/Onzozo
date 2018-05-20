@@ -6,6 +6,9 @@ from trender import TRender
 from discord import Embed
 from tinydb import TinyDB, Query
 
+with open('conf/server_settings.yaml') as f:
+    SERVSET = yaml.load(f)
+
 def dictsub(DICT, SUBS):
 
     TEMP = TRender(json.dumps(DICT))

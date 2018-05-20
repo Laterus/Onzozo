@@ -2,26 +2,38 @@
 
 ##class section
 
-Taunt:
-  icon: imgs/icons/pending.png
+taunt:
+  icon: 'imgs/icons/pending.png'
+  display: 'Taunt'
   desc: 'Taunt Target dealing physical damage'
-  mod: STR
+  type:
+    - 'damage'
+    - 'effect'
+  target: 'enemy'
+  formula: 'sdf'
+  mod: 'str'
   mnum: .5
   cld: 20
   aoe: False
 
-Bash:
-  icon: imgs/icons/pending.png
+bash:
+  icon: 'imgs/icons/pending.png'
+  display: 'Bash'
   desc: 'Attack Target dealing heavy physical damage'
-  mod: DEF
+  type:
+    - 'damage'
+  target: 'enemy'
+  formula: 'sdf'
+  mod: 'def'
   mnum: 2
   cld: 40
   aoe: False
 
-BackStab:
-  icon: imgs/icons/pending.png
+backstab:
+  icon: 'imgs/icons/pending.png'
+  display: 'BackStab'
   desc: 'Stab the target for physical damage'
-  mod: STR
+  mod: 'str'
   mnum: 3
   cld: 15
   aoe: False

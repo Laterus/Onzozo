@@ -1,0 +1,6 @@
+tokenfile: 'conf/token'
+
+channels:
+    intro: '446315742942593024'
+    headquarters: '446314223967141888'
+    battles: '436221281457799178'

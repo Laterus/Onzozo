@@ -5,9 +5,10 @@ import asyncio
 import core.intro as intro
 import core.headquarters as headquarters
 import core.battle as battle
+from core.common import SERVSET
 
 CLIENT = discord.Client()
-for line in open('conf/token', 'r'):
+for line in open(SERVSET['tokenfile'], 'r'):
     TOKEN = line.rstrip('\n')
 
 async def setup():
@@ -23,17 +24,19 @@ async def on_ready():
 
 @CLIENT.event
 async def on_reaction_add(reaction, user):
-    try:
-        if reaction.message.embeds[0]['author']['name'] == 'BATTLE!':
-            if reaction.emoji != '👍':
-                await CLIENT.remove_reaction(reaction.message,
-                                             reaction.emoji, user)
-    except IndexError:
-        pass
+    pass
 
 @CLIENT.event
 async def on_message(message):
-    if message.channel.name == 'headquarters' and message.content.startswith('!'):
+    if message.channel.id not in SERVSET['channels'].values():
+        return
+    if message.content.startswith('//'):
+        await battle.msgparse(message)
+        await CLIENT.delete_message(message)
+    elif message.channel.name == 'headquarters' and message.content.startswith('!'):
         await headquarters.parse(CLIENT, message)
+    else:
+        if message.author != CLIENT.user:
+            await CLIENT.delete_message(message)
 
 CLIENT.run(TOKEN)

@@ -1,0 +1,4 @@
+battle:
+    damage: (@mod * @mnum!)
+    heal: (@mod * @mnum!)
+    effect: 0
