@@ -10,7 +10,6 @@ taunt:
     - 'damage'
     - 'effect'
   target: 'enemy'
-  formula: 'sdf'
   mod: 'str'
   mnum: .5
   cld: 20
@@ -23,7 +22,6 @@ bash:
   type:
     - 'damage'
   target: 'enemy'
-  formula: 'sdf'
   mod: 'def'
   mnum: 2
   cld: 40
