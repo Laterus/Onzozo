@@ -31,6 +31,9 @@ backstab:
   icon: 'imgs/icons/pending.png'
   display: 'BackStab'
   desc: 'Stab the target for physical damage'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: 'str'
   mnum: 3
   cld: 15
@@ -39,6 +42,9 @@ backstab:
 ShadowStrike:
   icon: imgs/icons/pending.png
   desc: 'Attack Target dealing dark damage'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: INT
   mnum: 50
   cld: 4
@@ -47,6 +53,9 @@ ShadowStrike:
 Fireball:
   icon: imgs/icons/pending.png
   desc: 'Deals Fire damage to target'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: INT
   mnum: 2
   cld: 15
@@ -55,6 +64,9 @@ Fireball:
 Inferno:
   icon: imgs/icons/pending.png
   desc: 'Heavy Area Fire Damage to all targets'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: INT
   mnum: 4
   cld: 60
@@ -63,6 +75,9 @@ Inferno:
 Heal:
   icon: imgs/icons/pending.png
   desc: 'Heal one Party Member'
+  type:
+    - 'heal'
+  target: 'player'
   mod: INT
   mnum: 3
   cld: 15
@@ -71,6 +86,9 @@ Heal:
 Prayer:
   icon: imgs/icons/pending.png
   desc: 'Heal Party'
+  type:
+    - 'heal'
+  target: 'player'
   mod: INT
   mnum: 2
   cld: 40
@@ -79,6 +97,9 @@ Prayer:
 Slam:
   icon: imgs/icons/pending.png
   desc: 'Slam a target for phsycial damage'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: str
   nmun: 1
   cld: 15
@@ -87,6 +108,9 @@ Slam:
 Bladestorm:
   icon: imgs/icons/pending.png
   desc: 'Rampage all targets for physical damage'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: str
   nmun: 3
   cld: 45
@@ -95,6 +119,9 @@ Bladestorm:
 Pyroblast:
   icon: imgs/icons/pending.png
   desc: 'A heavy fire spell that hits one target'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: int
   nmun: 10
   cld: 90
@@ -103,6 +130,9 @@ Pyroblast:
 Judgement:
   icon: imgs/icons/pending.png
   desc: 'Judge the target for holy damage'
+  type:
+    - 'damage'
+  target: 'enemy'
   mod: int
   nmun: 2
   cld: 20
@@ -113,6 +143,9 @@ Judgement:
 Slap:
   icon: imgs/icons/pending.png
   desc: 'A minor slap to the target for physical dmg'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 1
   cld: 15
@@ -121,6 +154,9 @@ Slap:
 Goo Ball:
   icon: imgs/icons/pending.png
   desc: 'Toss a elemental ball for earth damage at the target'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 2
   cld: 40
@@ -129,6 +165,9 @@ Goo Ball:
 Slime Time:
   icon: imgs/icons/pending.png
   desc: 'Expel all stored goo for high aoe earth damage'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 2
   cld: 70
@@ -137,6 +176,9 @@ Slime Time:
 Claw:
   icon: imgs/icons/pending.png
   desc: 'Claw the target for physical damage'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 1
   cld: 15
@@ -145,6 +187,9 @@ Claw:
 Swipe:
   icon: imgs/icons/pending.png
   desc: 'Swipe all targets for physical damage'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 1
   cld: 30
@@ -153,6 +198,9 @@ Swipe:
 Fatal Blow:
   icon: imgs/icons/pending.png
   desc: 'A heavy physical strike on a target'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 3
   cld: 50
@@ -161,6 +209,9 @@ Fatal Blow:
 Zap:
   icon: imgs/icons/pending.png
   desc: 'Attacks a target for electric damage'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 1
   cld: 30
@@ -169,6 +220,9 @@ Zap:
 Storm:
   icon: imgs/icons/pending.png
   desc: 'An area of electric damange to all targets'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 1
   cld: 80
@@ -177,6 +231,9 @@ Storm:
 Fumble:
   icon: imgs/icons/pending.png
   desc: 'The Monster fumbles, falling over and wastes their turn'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 0
   cld: 30
@@ -185,6 +242,9 @@ Fumble:
 Spook:
   icon: imgs/icons/pending.png
   desc: 'Cause a shadow of terror doing area shadow damage'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 3
   cld: 45
@@ -193,6 +253,9 @@ Spook:
 Lick:
   icon: imgs/icons/pending.png
   desc: 'Lick the target for high physical dmg'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 2
   cld: 20
@@ -201,6 +264,9 @@ Lick:
 Gun:
   icon: imgs/icons/pending.png
   desc: 'Shoot the target, this will end in death'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 100
   cld: 80
@@ -209,6 +275,9 @@ Gun:
 Fire Breathe:
   icon: imgs/icons/pending.png
   desc: 'Burn all targets for fire dmg'
+  type:
+    - 'damage'
+  target: 'player'
   mod: pow
   nmun: 3
   cld: 60
