@@ -1,0 +1,31 @@
+battle_lobby_top:
+    title: "Here you can form or join parties to head into battle."
+    desc: "See below for the available options -"
+    color: 1
+    author:
+        name: "Welcome to the battle lobby!"
+    footer: ""
+    inline: False
+    fields:
+        -
+          name: "//form"
+          value: "Creates a new party, with you as leader"
+        -
+          name: "//join <pid>"
+          value: "Joins the party specified"
+        -
+          name: "//drop"
+          value: "Leave the party you are in\nDisbands party if leader"
+
+form_party:
+    title: "<TBD>"
+    desc: "<TBD>"
+    color: 1
+    author:
+        name: "@pid - Party Forming!"
+    footer: "Battle will begin when party fills or leader types //start"
+    inline: False
+    fields:
+        -
+          name: "Party Slots -"
+          value: "@s1!\n@s2!\n@s3!\n@s4"

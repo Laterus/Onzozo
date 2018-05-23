@@ -3,9 +3,10 @@
 import time
 import json
 import yaml
+import asyncio
 from discord import Embed
-from core.common import make_embed, dictsub
-import core.creators as creators
+from core.common import make_embed, dictsub, SERVSET
+import core.party as party
 
 with open('conf/battletext.yaml', 'r') as yamlf:
     TEXT = yaml.load(yamlf)
@@ -67,9 +68,9 @@ class battle(object):
         EMBD = dictsub(TEMP, SUBS)
         return make_embed(EMBD)
 
-    def cmdparse(self, MSG):
+    def cmdparse(self, CMD):
 
-        ACTION = MSG.content[2:].lower().split(' ')
+        ACTION = CMD.lower().split(' ')
         PLAYER = self.PARTY[MSG.author.id]
         if ACTION[0] in PLAYER['skills'].keys():
             SKLD = PLAYER['skills'][ACTION[0]]
@@ -95,41 +96,47 @@ class battle(object):
 async def msgparse(MSG):
 
     try:
-        BTL.cmdparse(MSG)
+        if MSG.content == '//form':
+            await party.form_party(MSG.channel, MSG.author)
+        BTL.cmdparse(MSG.content[2:])
     except NameError:
         pass
 
-async def gather_party(CLIENT, BTLCHAN):
+async def form_party(BTLLOB, PLAYER):
 
-    BASE = TEXT['gather_party']
-    BASECNT = TEXT['gather_party_cntdwn']
-    MSG = await CLIENT.send_message(BTLCHAN, embed=make_embed(BASE))
-    RES = await CLIENT.wait_for_reaction(emoji='👍', message=MSG)
-    #for cntdwn in range(10, 0, -1):
-    #    SUBS = { 'cntdwn': cntdwn }
-    #    EMBD = dictsub(BASECNT, SUBS)
-    #    await CLIENT.edit_message(MSG, embed=make_embed(EMBD))
-    #    time.sleep(1)
+    PARTY = party.gather_party(PLAYER.id)
+    GPMSG = await BTLLOB.send(embed=PARTY.display_status())
+    def check(msg):
+        return msg.channel == BTLLOB and msg.content.startswith('//join')
+    MSG = await CLIENT.wait_for('message', check=check)
+    for cntdwn in range(10, 0, -1):
+        SUBS = { 'cntdwn': cntdwn }
+        EMBD = dictsub(BASECNT, SUBS)
+        await GPMSG.edit(embed=make_embed(EMBD))
+        await asyncio.sleep(1)
     PARTY = await CLIENT.get_reaction_users(RES[0])
-    await CLIENT.delete_message(MSG)
+    await MSG.delete()
     return PARTY
 
-async def start(CLIENT):
+async def setup(CLIENT, GUILD, CATEGORY):
 
     global BTL
-    BTLCHAN = CLIENT.get_channel('436221281457799178')
-    await CLIENT.purge_from(BTLCHAN)
+    for chan in CATEGORY.channels:
+        if chan.name == 'battles_lobby':
+            BTLLOB = chan
+    await BTLLOB.purge()
+    await BTLLOB.send(embed=make_embed(TEXT['battle_lobby_top']))
 
     while True:
         JOINED = await gather_party(CLIENT, BTLCHAN)
         PARTY = creators.setup_player_party(JOINED)
         MONSTERS = creators.generate_monster(1)
         BTL = battle(PARTY, MONSTERS)
-        MPMSG = await CLIENT.send_message(BTLCHAN, embed=BTL.monster_party())
-        PPMSG = await CLIENT.send_message(BTLCHAN, embed=BTL.player_party())
+        MPMSG = await BTLCHAN.send(embed=BTL.monster_party())
+        PPMSG = await BTLCHAN.send(embed=BTL.player_party())
         COUNT = 0
         while BTL.STATUS == True:
-            await CLIENT.edit_message(MPMSG, embed=BTL.monster_party())
-            await CLIENT.edit_message(PPMSG, embed=BTL.player_party())
-            time.sleep(.1)
+            await MPMSG.edit(embed=BTL.monster_party())
+            await PPMSG.edit(embed=BTL.player_party())
+            await asyncio.sleep(1)
             COUNT += 1

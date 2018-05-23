@@ -6,6 +6,18 @@ from trender import TRender
 from discord import Embed
 from tinydb import TinyDB, Query
 
+DB = TinyDB('database/data.db', default_table='players')
+Q = Query()
+
+def get_db_data(DBT, QUERY):
+
+    TABLE = DB.table(DBT)
+    if DBT == 'players':
+        DATA = TABLE.search(Q.id == QUERY)
+    else:
+        DATA = TABLE.search(Q.name == QUERY)
+    return DATA[0]
+
 with open('conf/server_settings.yaml') as f:
     SERVSET = yaml.load(f)
 

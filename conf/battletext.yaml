@@ -1,23 +1,34 @@
-gather_party:
-    title: "An enemy awaits! Will you join the fight?"
-    desc: "React to this message with a :thumbsup: to join."
+battle_lobby_top:
+    title: "Here you can form or join parties to head into battle."
+    desc: "See below for the available options -"
     color: 1
     author:
-        name: "BATTLE!"
-    footer: ""
-
-gather_party_cntdwn:
-    title: "An enemy awaits! Will you join the fight?"
-    desc: "React to this message with a :thumbsup: to join."
-    color: 1
-    author:
-        name: "BATTLE!"
+        name: "Welcome to the battle lobby!"
     footer: ""
     inline: False
     fields:
         -
-          name: "Battle will begin in @cntdwn!..."
-          value: "There is still time to join!"
+          name: "//form"
+          value: "Creates a new party, with you as leader"
+        -
+          name: "//join <pid>"
+          value: "Joins the party specified"
+        -
+          name: "//drop"
+          value: "Leave the party you are in\nDoes nothing if not in a party"
+
+form_party:
+    title: "<TBD>"
+    desc: "<TBD>"
+    color: 1
+    author:
+        name: "@pid - Party Forming!"
+    footer: "Battle will begin when party fills or leader types //start"
+    inline: False
+    fields:
+        -
+          name: "Party Slots -"
+          value: "@s1!\n@s2!\n@s3!\n@s4"
 
 enemy_party:
     title: ""
@@ -44,42 +55,6 @@ player_party:
         -
           name: "(@slot!) @name"
           value: "@hpbar"
-
-action_lock_in:
-    title: "HP: @bar"
-    desc: "React to this message with the action you will take!\n\n*Party List*"
-    color: 65280
-    author: "@mondesc"
-    footer: "Timer: [@timer]"
-    inline: True
-    fields:
-        -
-          name: "%nick (%class) // HP: %bar"
-          value: "Available Actions: %actions\nOn Cooldown: %ocd"
-
-parties_turn:
-    title: "HP: @bar"
-    desc: "Party takes its turn..."
-    color: 16098851
-    author: "@mondesc"
-    footer: "Monster is readying an attack..."
-    inline: False
-    fields:
-        -
-          name: "@nick - @action"
-          value: "@actionresult"
-
-enemies_turn:
-    title: "HP: @bar"
-    desc: "Monster takes its turn..."
-    color: 13632027
-    author: "@mondesc"
-    footer: ""
-    inline: False
-    fields:
-        -
-          name: "Monster"
-          value: "Attacks for @dmg damage!"
 
 victory:
     title: "Your party has successfully beat the @mondesc"
